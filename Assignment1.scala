@@ -1,8 +1,18 @@
 package com.learn.scala
 
 import java.text.DecimalFormat
+import scala.math.BigDecimal.RoundingMode
 
 object Assignment1{
+
+  /**
+   * Round number to 3 decimal points
+   * @param x number
+   * @return rounded off number
+   */
+  def roundOff(x:Double):BigDecimal={
+    BigDecimal(x).setScale(3,RoundingMode.HALF_UP)
+  }
 
   def main(args: Array[String]): Unit = {
     try{
@@ -12,16 +22,19 @@ object Assignment1{
       // Taking input in form of double
       val num=scala.io.StdIn.readDouble()
 
+      // Rounding number
+      val roundNum=roundOff(num)
+
+      // Finding index of bucket
+      val idx=(roundNum/0.05).toInt
+
       // Finding the nearest 0.05 multiple lower than the number
-      val lowerBound=BigDecimal(num/0.05).setScale(0, BigDecimal.RoundingMode.FLOOR).toDouble*0.05
+      val lowerBound=roundOff(idx*0.05)
 
       // Finding the upper bound
       val upperBound=lowerBound+0.049
 
-      // Formatter for printing
-      val formatter=new DecimalFormat("#.###")
-
-      println(s"${formatter.format(lowerBound)} - ${formatter.format(upperBound)}")
+      println(s"$lowerBound - $upperBound")
 
     }catch {
 
