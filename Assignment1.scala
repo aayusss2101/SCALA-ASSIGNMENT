@@ -16,25 +16,26 @@ object Assignment1{
 
   def main(args: Array[String]): Unit = {
     try{
+      
+      val inputNumber=Array(12.05,12.03,10.33,11.45,13.50)
 
-      println("Enter Number: ")
+      for(num<-inputNumber) {
 
-      // Taking input in form of double
-      val num=scala.io.StdIn.readDouble()
+        // Rounding number
+        val roundNum = roundOff(num)
 
-      // Rounding number
-      val roundNum=roundOff(num)
+        // Finding index of bucket
+        val idx = (roundNum / 0.05).toInt
 
-      // Finding index of bucket
-      val idx=(roundNum/0.05).toInt
+        // Finding the nearest 0.05 multiple lower than the number
+        val lowerBound = roundOff(idx * 0.05)
 
-      // Finding the nearest 0.05 multiple lower than the number
-      val lowerBound=roundOff(idx*0.05)
+        // Finding the upper bound
+        val upperBound = lowerBound + 0.049
 
-      // Finding the upper bound
-      val upperBound=lowerBound+0.049
+        println(s"For $num: $lowerBound - $upperBound")
 
-      println(s"$lowerBound - $upperBound")
+      }
 
     }catch {
 
